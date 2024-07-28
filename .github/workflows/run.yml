@@ -30,4 +30,4 @@ jobs:
         git config --global user.email "action@github.com"
         git add .
         git commit -m "Sync"
-        git push
+        git push  --token ${{ secrets.MY_TOKEN }}
