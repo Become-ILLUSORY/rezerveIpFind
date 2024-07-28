@@ -28,7 +28,7 @@ jobs:
       run: |
         git config --global user.name "Action"
         git config --global user.email "action@github.com"
-        git add.
+        git add .
         git commit -m "Sync"
         git push origin main
         git push https://${{ github.actor }}:${{ secrets.MY_TOKEN }}@github.com/${{ github.repository }} main
