@@ -35,7 +35,7 @@ def update_cloudflare_dns(ips, subdomain, zone_id, api_token):
             "name": subdomain,
             "content": ips[0],  # Use the first IP in the list
             "ttl": 1,  # Auto TTL
-            "proxied": True
+            "proxied": False
         }
         response = requests.put(update_url, headers=headers, json=data)
     else:
