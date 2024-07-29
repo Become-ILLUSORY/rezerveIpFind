@@ -41,7 +41,7 @@ with concurrent.futures.ThreadPoolExecutor() as executor:
         pass
 
 # 计算成功率
-success_rate = {ip: success_count[ip] / (success_count[ip] + failure_count[ip]) for ip in ips}
+success_rate = {ip: success_count[ip] / (success_count[ip] + failure_count[ip] + 1e-8) for ip in ips}
 
 # 按照成功率降序排序
 sorted_ips = sorted(success_rate.items(), key=lambda x: x[1], reverse=True)
