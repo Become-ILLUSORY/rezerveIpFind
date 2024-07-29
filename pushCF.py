@@ -1,5 +1,6 @@
 import requests
 import json
+import os
 
 def update_cloudflare_dns(ips, subdomain, zone_id, api_token):
     # Cloudflare API endpoint
@@ -67,9 +68,11 @@ file_path = 'final_ip.txt'  # 替换为实际的文件路径
 ips = read_ips(file_path)
 
 
-subdomain = "bestip.zhangyykk.cloudns.org"
-zone_id = "206a9f560928c1f5102d5f6597e396f9"
-api_token = "PemkmL8qNGu4783W2BzMH00gbbTxrdq-mTGvdFfb"
+
+subdomain = os.getenv('subdomain')
+zone_id = os.getenv('zone_id')
+api_token = os.getenv('api_token')
+
 update_cloudflare_dns(ips, subdomain, zone_id, api_token)    
     
 
