@@ -1,4 +1,61 @@
-import CloudFlare
+import requests
+import json
+
+def update_cloudflare_dns(ips, subdomain, zone_id, api_token):
+    # Cloudflare API endpoint
+    url = f"https://api.cloudflare.com/client/v4/zones/{zone_id}/dns_records"
+    
+    # Headers for authentication
+    headers = {
+        "Authorization": f"Bearer {api_token}",
+        "Content-Type": "application/json"
+    }
+    
+    
+    
+    
+    # Get existing DNS records
+    response = requests.get(url, headers=headers)
+    existing_records = json.loads(response.text)['result']
+
+
+
+    # Find the record for the specified subdomain
+    record_id = None
+    for record in existing_records:
+        if record['name'] == subdomain:
+            record_id = record['id']
+            break
+    
+    if record_id:
+        # Update existing record
+        update_url = f"{url}/{record_id}"
+        data = {
+            "type": "A",
+            "name": subdomain,
+            "content": ips[0],  # Use the first IP in the list
+            "ttl": 1,  # Auto TTL
+            "proxied": True
+        }
+        response = requests.put(update_url, headers=headers, json=data)
+    else:
+        # Create new record
+        data = {
+            "type": "A",
+            "name": subdomain,
+            "content": ips[0],  # Use the first IP in the list
+            "ttl": 1,  # Auto TTL
+            "proxied": True
+        }
+        response = requests.post(url, headers=headers, json=data)
+    
+    if response.status_code in [200, 201]:
+        print(f"Successfully updated DNS record for {subdomain}")
+    else:
+        print(f"Failed to update DNS record. Status code: {response.status_code}")
+        print(response.text)
+
+
 
 
 def read_ips(file_path):
@@ -9,51 +66,25 @@ def read_ips(file_path):
 file_path = 'final_ip.txt'  # 替换为实际的文件路径
 ips = read_ips(file_path)
 
-def update_ips_to_cloudflare(ips, subdomain, email, api_key):
-    cf = CloudFlare.CloudFlare(email=email, token=api_key)
-    zone_id = None
-    record_id = None
+
+subdomain = "bestip.zhangyykk.cloudns.org"
+zone_id = "206a9f560928c1f5102d5f6597e396f9"
+api_token = "PemkmL8qNGu4783W2BzMH00gbbTxrdq-mTGvdFfb"
+update_cloudflare_dns(ips, subdomain, zone_id, api_token)    
+    
 
 
-    # 获取zone_id
-    zones = cf.zones.get(params={'name': subdomain.split('.')[0]})
-    if zones:
-        zone_id = zones[0]['id']
 
-    if not zone_id:
-        print("未找到该域名的zone_id，请检查域名是否正确")
-        return
 
-    # 获取record_id
-    records = cf.zones.dns_records.get(zone_id, params={'name': subdomain})
-    if records:
-        record_id = records[0]['id']
+ 
 
-    if not record_id:
-        print("未找到该子域名的record_id，请检查子域名是否正确")
-        return
 
-    # 更新IP地址
-    new_ips = ','.join(ips)
-    result = cf.zones.dns_records.put(record_id, data={
-        'type': 'A',
-        'name': subdomain,
-        'content': new_ips,
-        'ttl': 120,
-        'proxied': False
-    })
 
-    if result['success']:
-        print(f"子域名 {subdomain} 的IP地址已更新为：{new_ips}")
-    else:
-        print(f"更新失败：{result['errors'][0]['message']}")
 
-# 示例用法
-subdomain = 'bestip.zhangyykk.cloudns.org'
-email = '2781885401@qq.com'
-api_key = 'PemkmL8qNGu4783W2BzMH00gbbTxrdq-mTGvdFfb'
 
-update_ips_to_cloudflare(ips, subdomain, email, api_key)
+
+
+
 
 
 
