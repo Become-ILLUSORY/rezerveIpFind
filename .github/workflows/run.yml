@@ -9,6 +9,12 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    env:
+      api_token: ${{ secrets.API_TOKEN }}
+      subdomain: ${{ secrets.SUBDOMAIN }}
+      zone_id : ${{ secrets.ZONE_ID }}
+      
 
     steps:
     - uses: actions/checkout@v4
