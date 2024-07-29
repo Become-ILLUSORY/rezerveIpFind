@@ -13,3 +13,7 @@ subprocess.run(['python', 'getIP.py'], check=True)
 
 # 启动第二个脚本
 subprocess.run(['python','speedtest.py'], check=True)
+
+
+# 启动第三个脚本
+subprocess.run(['python','pushCF.py'], check=True)
