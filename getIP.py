@@ -19,7 +19,7 @@ def get_ip(urls, ips):
     return list(result)
 
 # 示例的网址列表
-urls = ['hk2.921219.xyz','hk.921219.xyz','hk1.921219.xyz','aliyun-hk.lianaishi.pub','1.1818.pp.ua']
+urls = ['aliyun.2096.us.kg','3.1818.pp.ua','hk2.921219.xyz','hk.921219.xyz','hk1.921219.xyz','aliyun-hk.lianaishi.pub','1.1818.pp.ua','hk.corevie.awcode.cn','hk08.yscard.gq','hk05.yscard.gq','hk10.yscard.gq','hk11.yscard.gq','max.jillmax1227.eu.org','kr.moonriver.sbs']
 # 示例的 IP 列表
 ips = ['114.114.114.114', '1.0.1.0', '8.8.8.8', '223.5.5.5']
 
