@@ -51,7 +51,7 @@ threshold = 0.8  # 可根据实际需求调整阈值
 filtered_ips = [ip for ip, rate in sorted_ips if rate >= threshold]
 
 # 输出成功率高的 IP
-with open('final_ip.txt', 'w', encoding="utf-8") as file:
+with open('ok_ip.txt', 'w', encoding="utf-8") as file:
     for ip in filtered_ips:
 
         file.write(f"{ip}\n")
