@@ -27,11 +27,21 @@ jobs:
         python -m pip install --upgrade pip
         pip install  requests cloudflare
 
-    - name: Fetch Provider
+    - name: getIP
       run: |
         python getIP.py
+        
+    - name: speedtest
+      run: |
         python speedtest.py
+        
+    - name: delay_test
+      run: |
         python delay_test.py
+
+
+    - name: CF_Push.py
+      run: |
         python CF_Push.py
 
         
