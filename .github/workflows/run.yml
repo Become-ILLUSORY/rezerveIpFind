@@ -29,7 +29,10 @@ jobs:
 
     - name: Fetch Provider
       run: |
-        python main.py
+        python getIP.py
+        python speedtest.py
+        python delay_test.py
+        python CF_Push.py
 
         
     - name: Commit and push changes
