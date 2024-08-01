@@ -10,12 +10,17 @@ except FileNotFoundError:
 
 # 启动第一个脚本
 subprocess.run(['python', 'getIP.py'], check=True)
+print('第一个执行完毕')
 
 # 启动第二个脚本
 subprocess.run(['python','speedtest.py'], check=True)
+print('第二个执行完毕')
 
 # 启动第三个脚本
 subprocess.run(['python','delay_test.py'], check=True)
+print('第三个执行完毕')
+
 
 # 启动第四个脚本
 subprocess.run(['python','CF_Push.py'], check=True)
+print('第四个执行完毕')
