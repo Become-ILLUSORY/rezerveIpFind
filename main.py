@@ -14,6 +14,8 @@ subprocess.run(['python', 'getIP.py'], check=True)
 # 启动第二个脚本
 subprocess.run(['python','speedtest.py'], check=True)
 
-
 # 启动第三个脚本
+subprocess.run(['python','delay_test.py'], check=True)
+
+# 启动第四个脚本
 subprocess.run(['python','CF_Push.py'], check=True)
